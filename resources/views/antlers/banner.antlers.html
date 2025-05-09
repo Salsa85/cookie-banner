@@ -29,46 +29,22 @@
 
 {{ if config.gtm_id or config.analytics_id }}
 <script>
-    function initConsentScripts() {
-        if (localStorage.getItem('cookiesAccepted') === 'all') {
-            {{ if config.gtm_id }}
-            // Inject GTM
-            if (!document.getElementById('cb-gtm-script')) {
-                const script = document.createElement('script');
-                script.id = 'cb-gtm-script';
-                script.async = true;
-                script.src = 'https://www.googletagmanager.com/gtm.js?id={{ config.gtm_id }}';
-                document.head.appendChild(script);
-
-                // Optionally, add the noscript iframe for GTM
-                const noscript = document.createElement('noscript');
-                noscript.innerHTML = '<iframe src="https://www.googletagmanager.com/ns.html?id={{ config.gtm_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>';
-                document.body.appendChild(noscript);
-            }
-            {{ /if }}
-
-            {{ if config.analytics_id }}
-            // Inject GA4
-            if (!document.getElementById('cb-ga4-script')) {
-                const script1 = document.createElement('script');
-                script1.id = 'cb-ga4-script';
-                script1.async = true;
-                script1.src = 'https://www.googletagmanager.com/gtag/js?id={{ config.analytics_id }}';
-                document.head.appendChild(script1);
-
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '{{ config.analytics_id }}');
-            }
-            {{ /if }}
-        }
-    }
-    initConsentScripts();
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'cookiesAccepted' && e.newValue === 'all') {
-            initConsentScripts();
-        }
+    // Always load GTM in your layout!
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    // Set default consent to granted on page load
+    gtag('consent', 'default', {
+      'ad_storage': 'granted',
+      'analytics_storage': 'granted'
+    });
+    // Grant consent when user accepts all cookies
+    document.querySelectorAll('.cb-accept-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        gtag('consent', 'update', {
+          'ad_storage': 'granted',
+          'analytics_storage': 'granted'
+        });
+      });
     });
 </script>
 {{ /if }}
