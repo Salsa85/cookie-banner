@@ -27,28 +27,47 @@
     </div>
 </div>
 
-@if(config('cookie-banner.analytics_id'))
+@if(config('cookie-banner.gtm_id') || config('cookie-banner.analytics_id'))
 <script>
-    // Check if user accepted cookies
-    function initGA() {
+    function initConsentScripts() {
         if (localStorage.getItem('cookiesAccepted') === 'all') {
-            const script1 = document.createElement('script');
-            script1.async = true;
-            script1.src = 'https://www.googletagmanager.com/gtag/js?id={{ config('cookie-banner.analytics_id') }}';
-            document.head.appendChild(script1);
+            @if(config('cookie-banner.gtm_id'))
+            // Inject GTM
+            if (!document.getElementById('cb-gtm-script')) {
+                const script = document.createElement('script');
+                script.id = 'cb-gtm-script';
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtm.js?id={{ config('cookie-banner.gtm_id') }}';
+                document.head.appendChild(script);
 
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '{{ config('cookie-banner.analytics_id') }}');
+                // Optionally, add the noscript iframe for GTM
+                const noscript = document.createElement('noscript');
+                noscript.innerHTML = '<iframe src="https://www.googletagmanager.com/ns.html?id={{ config('cookie-banner.gtm_id') }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>';
+                document.body.appendChild(noscript);
+            }
+            @endif
+
+            @if(config('cookie-banner.analytics_id'))
+            // Inject GA4
+            if (!document.getElementById('cb-ga4-script')) {
+                const script1 = document.createElement('script');
+                script1.id = 'cb-ga4-script';
+                script1.async = true;
+                script1.src = 'https://www.googletagmanager.com/gtag/js?id={{ config('cookie-banner.analytics_id') }}';
+                document.head.appendChild(script1);
+
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '{{ config('cookie-banner.analytics_id') }}');
+            }
+            @endif
         }
     }
-    // Run on page load
-    initGA();
-    // Listen for cookie consent changes
+    initConsentScripts();
     window.addEventListener('storage', function(e) {
         if (e.key === 'cookiesAccepted' && e.newValue === 'all') {
-            initGA();
+            initConsentScripts();
         }
     });
 </script>
