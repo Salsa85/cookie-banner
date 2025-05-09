@@ -1,22 +1,23 @@
 {
-    "name": "zencule/cookie-banner",
+    "name": "salsa85/cookie-banner",
     "description": "A modern, customizable cookie consent banner for Laravel and Statamic applications",
     "type": "statamic-addon",
     "license": "MIT",
+    "version": "0.0.1",
     "authors": [
         {
-            "name": "Zencule",
+            "name": "R. de la Cour",
             "email": "info@zencule.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Zencule\\CookieBanner\\": "src/"
+            "Salsa85\\CookieBanner\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Zencule\\CookieBanner\\Tests\\": "tests"
+            "Salsa85\\CookieBanner\\Tests\\": "tests"
         }
     },
     "extra": {
@@ -26,7 +27,7 @@
         },
         "laravel": {
             "providers": [
-                "Zencule\\CookieBanner\\CookieBannerServiceProvider"
+                "Salsa85\\CookieBanner\\CookieBannerServiceProvider"
             ]
         }
     },

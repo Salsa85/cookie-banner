@@ -1,9 +1,9 @@
 <?php
 
-namespace Zencule\CookieBanner\Tests;
+namespace Salsa85\CookieBanner\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Zencule\CookieBanner\CookieBannerServiceProvider;
+use Salsa85\CookieBanner\CookieBannerServiceProvider;
 
 class TestCase extends Orchestra
 {

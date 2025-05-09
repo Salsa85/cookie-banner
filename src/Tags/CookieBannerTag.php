@@ -1,15 +1,15 @@
 <?php
 
-namespace Zencule\CookieBanner\Tags;
+namespace Salsa85\CookieBanner\Tags;
 
 use Statamic\Tags\Tags;
 
 class CookieBannerTag extends Tags
 {
-    protected static $handle = 'zencule';
+    protected static $handle = 'salsa85';
 
     /**
-     * {{ zencule:cookie-banner }}
+     * {{ salsa85:cookie-banner }}
      */
     public function cookieBanner()
     {

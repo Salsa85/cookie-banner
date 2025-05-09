@@ -1,9 +1,9 @@
 <?php
 
-namespace Zencule\CookieBanner;
+namespace Salsa85\CookieBanner;
 
 use Statamic\Providers\AddonServiceProvider;
-use Zencule\CookieBanner\Tags\CookieBannerTag;
+use Salsa85\CookieBanner\Tags\CookieBannerTag;
 
 class CookieBannerServiceProvider extends AddonServiceProvider
 {

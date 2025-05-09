@@ -1,8 +1,8 @@
 <?php
 
-namespace Zencule\CookieBanner\Tests\Feature;
+namespace Salsa85\CookieBanner\Tests\Feature;
 
-use Zencule\CookieBanner\Tests\TestCase;
+use Salsa85\CookieBanner\Tests\TestCase;
 
 class CookieBannerTest extends TestCase
 {
