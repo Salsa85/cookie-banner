@@ -1,3 +1,4 @@
+<!-- Include cookie-banner.css for styling -->
 <div x-data="{ showBanner: !localStorage.getItem('cookiesAccepted') }" 
     x-cloak
     x-show="showBanner"
@@ -7,19 +8,19 @@
     x-transition:leave="transition ease-in duration-300"
     x-transition:leave-start="opacity-100 transform translate-y-0"
     x-transition:leave-end="opacity-0 transform translate-y-full"
-    class="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 p-4 md:p-6">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <div class="text-sm md:text-base text-gray-700">
+    class="cb-banner">
+    <div class="cb-banner-inner">
+        <div class="cb-banner-text">
             {{ config.messages.banner_text }}
-            <a href="{{ config.privacy_policy_url }}" class="text-blue-600 hover:text-blue-800 underline">{{ config.messages.more_info }}</a>
+            <a href="{{ config.privacy_policy_url }}" class="cb-link">{{ config.messages.more_info }}</a>
         </div>
-        <div class="flex gap-3">
+        <div class="cb-btn-group">
             <button @click="localStorage.setItem('cookiesAccepted', 'essential'); showBanner = false" 
-                class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors">
+                class="cb-essential-btn">
                 {{ config.messages.essential_button }}
             </button>
             <button @click="localStorage.setItem('cookiesAccepted', 'all'); showBanner = false" 
-                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
+                class="cb-accept-btn">
                 {{ config.messages.accept_button }}
             </button>
         </div>
@@ -51,4 +52,6 @@
         }
     });
 </script>
-{{ /if }} 
+{{ /if }}
+
+<!-- Uses custom CSS classes: cb-banner, cb-banner-inner, cb-banner-text, cb-link, cb-btn-group, cb-essential-btn, cb-accept-btn --> 
