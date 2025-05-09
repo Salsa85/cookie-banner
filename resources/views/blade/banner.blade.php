@@ -1,0 +1,54 @@
+<div x-data="{ showBanner: !localStorage.getItem('cookiesAccepted') }" 
+    x-cloak
+    x-show="showBanner"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 transform translate-y-full"
+    x-transition:enter-end="opacity-100 transform translate-y-0"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100 transform translate-y-0"
+    x-transition:leave-end="opacity-0 transform translate-y-full"
+    class="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 p-4 md:p-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="text-sm md:text-base text-gray-700">
+            {{ config('cookie-banner.messages.banner_text') }}
+            <a href="{{ config('cookie-banner.privacy_policy_url') }}" class="text-blue-600 hover:text-blue-800 underline">{{ config('cookie-banner.messages.more_info') }}</a>
+        </div>
+        <div class="flex gap-3">
+            <button @click="localStorage.setItem('cookiesAccepted', 'essential'); showBanner = false" 
+                class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors">
+                {{ config('cookie-banner.messages.essential_button') }}
+            </button>
+            <button @click="localStorage.setItem('cookiesAccepted', 'all'); showBanner = false" 
+                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
+                {{ config('cookie-banner.messages.accept_button') }}
+            </button>
+        </div>
+    </div>
+</div>
+
+@if(config('cookie-banner.analytics_id'))
+<script>
+    // Check if user accepted cookies
+    function initGA() {
+        if (localStorage.getItem('cookiesAccepted') === 'all') {
+            const script1 = document.createElement('script');
+            script1.async = true;
+            script1.src = 'https://www.googletagmanager.com/gtag/js?id={{ config('cookie-banner.analytics_id') }}';
+            document.head.appendChild(script1);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '{{ config('cookie-banner.analytics_id') }}');
+        }
+    }
+    // Run on page load
+    initGA();
+    // Listen for cookie consent changes
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'cookiesAccepted' && e.newValue === 'all') {
+            initGA();
+        }
+    });
+</script>
+@endif 
