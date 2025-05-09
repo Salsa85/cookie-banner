@@ -27,7 +27,6 @@
     </div>
 </div>
 
-{{ if config.gtm_id or config.analytics_id }}
 <script>
     // Always load GTM in your layout!
     window.dataLayer = window.dataLayer || [];
@@ -47,6 +46,5 @@
       });
     });
 </script>
-{{ /if }}
 
 <!-- Uses custom CSS classes: cb-banner, cb-banner-inner, cb-banner-text, cb-link, cb-btn-group, cb-essential-btn, cb-accept-btn --> 

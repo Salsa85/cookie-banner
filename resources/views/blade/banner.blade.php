@@ -27,7 +27,6 @@
     </div>
 </div>
 
-@if(config('cookie-banner.gtm_id') || config('cookie-banner.analytics_id'))
 <script>
     // Always load GTM in your layout!
     window.dataLayer = window.dataLayer || [];
@@ -47,7 +46,6 @@
       });
     });
 </script>
-@endif 
 
 <!-- Uses custom CSS classes: cb-banner, cb-banner-inner, cb-banner-text, cb-link, cb-btn-group, cb-essential-btn, cb-accept-btn -->
 
