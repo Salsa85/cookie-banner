@@ -1,12 +1,12 @@
 # Zencule Cookie Banner
 
-A modern, customizable cookie consent banner for Laravel and Statamic applications. Built with Alpine.js and Tailwind CSS.
+A modern, customizable cookie consent banner for Laravel and Statamic applications. Built with Alpine.js and plain CSS (no Tailwind required).
 
 ![License](https://img.shields.io/github/license/zencule/cookie-banner)
 
 ## Features
 
-- 🎨 Modern, responsive design with Tailwind CSS
+- 🎨 Modern, responsive design with plain CSS (no Tailwind required)
 - ⚡ Smooth animations with Alpine.js
 - 📊 Google Analytics integration
 - 🔒 GDPR-compliant with essential/all cookies options
@@ -19,6 +19,20 @@ You can install the package via composer:
 
 ```bash
 composer require zencule/cookie-banner
+```
+
+### CSS
+
+The package includes a plain CSS file for styling. To use the default styles, import or copy `cookie-banner.css` from the package's `resources/` directory into your project and include it in your main CSS or HTML:
+
+```html
+<link rel="stylesheet" href="/path/to/cookie-banner.css">
+```
+
+Or, if using a bundler:
+
+```js
+import 'cookie-banner/resources/cookie-banner.css';
 ```
 
 ### Laravel
@@ -82,7 +96,7 @@ return [
 
 ### Styling
 
-The banner uses Tailwind CSS classes by default. You can customize the appearance by:
+The banner uses plain CSS classes by default. You can customize the appearance by:
 
 1. Publishing the views:
 ```bash
@@ -92,6 +106,9 @@ php artisan vendor:publish --tag=cookie-banner
 2. Modifying the templates in:
    - Laravel: `resources/views/vendor/cookie-banner/blade/banner.blade.php`
    - Statamic: `resources/views/vendor/cookie-banner/antlers/banner.antlers.html`
+
+3. Editing the CSS file:
+   - Copy or import `resources/cookie-banner.css` and modify it as needed for your branding.
 
 ### Analytics
 
@@ -109,7 +126,6 @@ The script will only load after the user accepts all cookies.
 - Laravel 10.0 or higher
 - Statamic 4.0 or higher (for Statamic integration)
 - Alpine.js
-- Tailwind CSS
 
 ## Contributing
 
