@@ -6,10 +6,10 @@ use Statamic\Tags\Tags;
 
 class CookieBannerTag extends Tags
 {
-    protected static $handle = 'salsa85';
+    protected static $handle = 'zencule';
 
     /**
-     * {{ salsa85:cookie-banner }}
+     * {{ zencule:cookie-banner }}
      */
     public function cookieBanner()
     {
