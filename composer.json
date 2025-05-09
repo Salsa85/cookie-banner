@@ -3,7 +3,7 @@
     "description": "A modern, customizable cookie consent banner for Laravel and Statamic applications",
     "type": "statamic-addon",
     "license": "MIT",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "authors": [
         {
             "name": "R. de la Cour",
